@@ -1,0 +1,47 @@
+C:\cygwin64\bin\cmake.exe -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=C:/cygwin64/bin/make.exe -DCMAKE_C_COMPILER=C:/cygwin64/bin/gcc.exe -DCMAKE_CXX_COMPILER=C:/cygwin64/bin/c++.exe -G "CodeBlocks - Unix Makefiles" /cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch
+-- The C compiler identification is GNU 7.4.0
+CMake Warning at /usr/share/cmake-3.6.2/Modules/Platform/CYGWIN.cmake:15 (message):
+  CMake no longer defines WIN32 on Cygwin!
+
+  (1) If you are just trying to build this project, ignore this warning or
+  quiet it by setting CMAKE_LEGACY_CYGWIN_WIN32=0 in your environment or in
+  the CMake cache.  If later configuration or build errors occur then this
+  project may have been written under the assumption that Cygwin is WIN32.
+  In that case, set CMAKE_LEGACY_CYGWIN_WIN32=1 instead.
+
+  (2) If you are developing this project, add the line
+
+    set(CMAKE_LEGACY_CYGWIN_WIN32 0) # Remove when CMake >= 2.8.4 is required
+
+  at the top of your top-level CMakeLists.txt file or set the minimum
+  required version of CMake to 2.8.4 or higher.  Then teach your project to
+  build on Cygwin without WIN32.
+Call Stack (most recent call first):
+  /usr/share/cmake-3.6.2/Modules/CMakeSystemSpecificInformation.cmake:36 (include)
+  CMakeLists.txt:2 (project)
+
+
+CMake Error at CMakeLists.txt:2 (project):
+  The CMAKE_C_COMPILER:
+
+    C:/cygwin64/bin/gcc.exe
+
+  is not a full path and was not found in the PATH.
+
+  Tell CMake where to find the compiler by setting either the environment
+  variable "CC" or the CMake cache entry CMAKE_C_COMPILER to the full path to
+  the compiler, or to the compiler name if it is in the PATH.
+
+
+CMake Warning (dev) in CMakeLists.txt:
+  No cmake_minimum_required command is present.  A line of code such as
+
+    cmake_minimum_required(VERSION 3.6)
+
+  should be added at the top of the file.  The version specified may be lower
+  if you wish to support older CMake versions for this project.  For more
+  information run "cmake --help-policy CMP0000".
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Configuring incomplete, errors occurred!
+See also "/cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/cmake-build-release/CMakeFiles/CMakeOutput.log".

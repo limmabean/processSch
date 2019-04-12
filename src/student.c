@@ -60,20 +60,35 @@ unsigned int cpu_count;
  */
 static void schedule(unsigned int cpu_id)
 {
-	pthread_mutex_lock(queue_mutex);
+	pthread_mutex_lock(&queue_mutex);
 	if(queue_not_empty) {
-		pcb_t *readyQIterator = readyQHead; 
-		//Iterate to the end;
-		while(readyQIterator->next != NULL) {
-			readyQIterator = readyQIterator->next;
-		}
-		readyQIterator->state = PROCESS_RUNNING;
-		//TODO: NEED TO DELETE OFF LIST
-		context_switch(cpu_id, readyQIterator);
+		pcb_t *readyQIterator = readyQHead;
+		//If the readyQ only has one value (This is to prevent seg faults)
+        if(readyQIterator->next = NULL) {
+            //Set state to running
+            // [ RUNNING ] -> NULL
+            readyQIterator->state = PROCESS_RUNNING;
+            //Set readyQHead = NULL;
+            // NULL
+            readyQIterator = NULL;
+        } else {
+            //Iterate to second to the end;
+            // [ X ] -> [   ] -> NULL
+            while((readyQIterator->next)->next != NULL) {
+                readyQIterator = readyQIterator->next;
+            }
+            //Set the end's state to running
+            // [ X ] -> [running] -> NULL
+            (readyQIterator->next)->state = PROCESS_RUNNING;
+            //Remove the process from the end of the list by
+            // [ X ] -> NULL
+            readyQIterator->next = NULL;
+        }
+        context_switch(cpu_id, readyQIterator);
 	} else {
 		context_switch(cpu_id, NULL);
 	}
-	pthread_mutex_unlock(queue_mutex);
+	pthread_mutex_unlock(&queue_mutex);
 }
 
 
@@ -86,17 +101,12 @@ static void schedule(unsigned int cpu_id)
  */
 extern void idle(unsigned int cpu_id)
 {
-
-    /*
-     * REMOVE THE LINE BELOW AFTER IMPLEMENTING IDLE()
-     *
-     * idle() must block when the ready queue is empty, or else the CPU threads
-     * will spin in a loop.  Until a ready queue is implemented, we'll put the
-     * thread to sleep to keep it from consuming 100% of the CPU time.  Once
-     * you implement a proper idle() function using a condition variable,
-     * remove the call to mt_safe_usleep() below.
-     */
-    mt_safe_usleep(1000000);
+    pthread_mutex_lock(&queue_mutex);
+    while(readyQHead == NULL){
+        pthread_cond_wait(&queue_not_empty, &queue_mutex);
+    }
+    pthread_mutex_unlock(&queue_mutex);
+    schedule(cpu_id);
 }
 
 
@@ -109,7 +119,28 @@ extern void idle(unsigned int cpu_id)
  */
 extern void preempt(unsigned int cpu_id)
 {
+    //Lock the queue
+    pthread_mutex_lock(&queue_mutex);
+    pcb_t *readyQIterator = readyQHead;
+    if (readyQHead == NULL) {
 
+    } else {
+        //Iterate to the end;
+        while(readyQIterator->next != NULL) {
+            readyQIterator = readyQIterator->next;
+        }
+        //Lock the running processes
+        pthread_mutex_lock(&running_processes_mutex);
+        //Place the running process into the readyQ
+        readyQIterator->next = running_processes[cpu_id];
+        //Set it's state to ready
+        (readyQIterator->next)->state = PROCESS_READY;
+        //Unlock the running processes
+        pthread_mutex_unlock(&running_processes_mutex);
+        //Unlock the queue
+        pthread_mutex_unlock(&queue_mutex);
+    }
+    schedule(cpu_id);
 }
 
 
@@ -122,7 +153,16 @@ extern void preempt(unsigned int cpu_id)
  */
 extern void yield(unsigned int cpu_id)
 {
-
+    //Lock the running processes
+    pthread_mutex_lock(&running_processes_mutex);
+    //Get the process currently running
+    pcb_t *currentProcess = running_processes[cpu_id];
+    //Set the state as waiting
+    currentProcess->state = PROCESS_WAITING;
+    //Unlock the running processes
+    pthread_mutex_unlock(&running_processes_mutex);
+    //Call schedule() to select new process
+    schedule(cpu_id);
 }
 
 
@@ -133,13 +173,20 @@ extern void yield(unsigned int cpu_id)
  */
 extern void terminate(unsigned int cpu_id)
 {
+    //Lock the running processes
+    pthread_mutex_lock(&running_processes_mutex);
+    //Get the process currently running
 	pcb_t *currentProcess = running_processes[cpu_id];
-	currentProcess->PROCESS_TERMINATED;
-	schedule();
+	//Set the state as finished
+	currentProcess->state = PROCESS_TERMINATED;
+	//Unlock the running processes
+    pthread_mutex_unlock(&running_processes_mutex);
+    //Call schedule() to select new process
+	schedule(cpu_id);
 }
 
 /*
- * wake_up() is the handler called by the simulator when a process's I/O
+ * wake_up() is the handler called by t he simulator when a process's I/O
  * request completes.  It should perform the following tasks:
  *
  *   1. Mark the process as READY, and insert it into the ready queue.
@@ -155,16 +202,23 @@ extern void terminate(unsigned int cpu_id)
  */
 extern void wake_up(pcb_t *process)
 {
-	//IF EMPTY
-	if(queue_not_empty == 0) {
-		queue_not_empty = 1;
-	}
-	//FIFO
-	//Mark the process as ready
-	process->state = PROCESS_READY;
-	//Insert into ready queue [new process] -> [old process]
-	process->next = readyQHead;
-	readyQHead = process;
+    //IF EMPTY/NOTHING IN QUEUE
+    if(readyQHead == NULL) {
+        //FIFO
+        //Mark the process as ready
+        process->state = PROCESS_READY;
+        //Insert into ready queue [new process] -> [old process]
+        process->next = readyQHead;
+        readyQHead = process;
+        pthread_cond_signal(&queue_not_empty);
+    } else {
+        //FIFO
+        //Mark the process as ready
+        process->state = PROCESS_READY;
+        //Insert into ready queue [new process] -> [old process]
+        process->next = readyQHead;
+        readyQHead = process;
+    }
 
 }
 
@@ -191,6 +245,9 @@ int main(int argc, char *argv[])
     /* Start the simulator in the library */
     start_simulator(cpu_count);
 
+    pthread_mutex_destroy(&running_processes_mutex);
+    pthread_mutex_init(&queue_mutex, NULL);
+    pthread_cond_destroy(&queue_not_empty);
     return 0;
 }
 

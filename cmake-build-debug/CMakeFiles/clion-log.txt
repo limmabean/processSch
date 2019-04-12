@@ -1,0 +1,15 @@
+C:\Users\limma\.CLion2019.1\system\cygwin_cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=C:/cygwin64/bin/make.exe -G "CodeBlocks - Unix Makefiles" /cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch
+CMake Warning (dev) at /cygdrive/c/Users/limma/.CLion2019.1/system/cygwin_cmake/share/cmake-3.13.4/Modules/Platform/CYGWIN.cmake:31 (message):
+  CMAKE_LEGACY_CYGWIN_WIN32 ignored because
+
+    cmake_minimum_required(VERSION 3.13)
+
+  is at least 2.8.4.
+Call Stack (most recent call first):
+  /cygdrive/c/Users/limma/.CLion2019.1/system/cygwin_cmake/share/cmake-3.13.4/Modules/CMakeSystemSpecificInformation.cmake:26 (include)
+  CMakeLists.txt:3 (project)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/cmake-build-debug
