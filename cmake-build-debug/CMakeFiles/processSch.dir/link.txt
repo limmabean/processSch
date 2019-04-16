@@ -1,1 +1,1 @@
-/usr/bin/cc -g  -Wl,--enable-auto-import CMakeFiles/processSch.dir/src/os-sim.c.o CMakeFiles/processSch.dir/src/process.c.o CMakeFiles/processSch.dir/src/student.c.o  -o processSch.exe -Wl,--out-implib,libprocessSch.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
+C:/cygwin64/bin/gcc.exe -g  -Wl,--enable-auto-import CMakeFiles/processSch.dir/src/os-sim.c.o CMakeFiles/processSch.dir/src/process.c.o CMakeFiles/processSch.dir/src/student.c.o  -o processSch.exe -Wl,--out-implib,libprocessSch.dll.a -Wl,--major-image-version,0,--minor-image-version,0 

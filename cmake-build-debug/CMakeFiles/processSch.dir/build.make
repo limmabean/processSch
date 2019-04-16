@@ -34,19 +34,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /cygdrive/c/Users/limma/.CLion2019.1/system/cygwin_cmake/bin/cmake.exe
+CMAKE_COMMAND = /cygdrive/c/Users/Jongmook/.CLion2019.1/system/cygwin_cmake/bin/cmake.exe
 
 # The command to remove a file.
-RM = /cygdrive/c/Users/limma/.CLion2019.1/system/cygwin_cmake/bin/cmake.exe -E remove -f
+RM = /cygdrive/c/Users/Jongmook/.CLion2019.1/system/cygwin_cmake/bin/cmake.exe -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch
+CMAKE_SOURCE_DIR = /cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/cmake-build-debug
+CMAKE_BINARY_DIR = /cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/processSch.dir/depend.make
@@ -59,42 +59,42 @@ include CMakeFiles/processSch.dir/flags.make
 
 CMakeFiles/processSch.dir/src/os-sim.c.o: CMakeFiles/processSch.dir/flags.make
 CMakeFiles/processSch.dir/src/os-sim.c.o: ../src/os-sim.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/processSch.dir/src/os-sim.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/processSch.dir/src/os-sim.c.o   -c /cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/src/os-sim.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/processSch.dir/src/os-sim.c.o"
+	C:/cygwin64/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/processSch.dir/src/os-sim.c.o   -c /cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/src/os-sim.c
 
 CMakeFiles/processSch.dir/src/os-sim.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/processSch.dir/src/os-sim.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/src/os-sim.c > CMakeFiles/processSch.dir/src/os-sim.c.i
+	C:/cygwin64/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/src/os-sim.c > CMakeFiles/processSch.dir/src/os-sim.c.i
 
 CMakeFiles/processSch.dir/src/os-sim.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/processSch.dir/src/os-sim.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/src/os-sim.c -o CMakeFiles/processSch.dir/src/os-sim.c.s
+	C:/cygwin64/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/src/os-sim.c -o CMakeFiles/processSch.dir/src/os-sim.c.s
 
 CMakeFiles/processSch.dir/src/process.c.o: CMakeFiles/processSch.dir/flags.make
 CMakeFiles/processSch.dir/src/process.c.o: ../src/process.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/processSch.dir/src/process.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/processSch.dir/src/process.c.o   -c /cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/src/process.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/processSch.dir/src/process.c.o"
+	C:/cygwin64/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/processSch.dir/src/process.c.o   -c /cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/src/process.c
 
 CMakeFiles/processSch.dir/src/process.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/processSch.dir/src/process.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/src/process.c > CMakeFiles/processSch.dir/src/process.c.i
+	C:/cygwin64/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/src/process.c > CMakeFiles/processSch.dir/src/process.c.i
 
 CMakeFiles/processSch.dir/src/process.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/processSch.dir/src/process.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/src/process.c -o CMakeFiles/processSch.dir/src/process.c.s
+	C:/cygwin64/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/src/process.c -o CMakeFiles/processSch.dir/src/process.c.s
 
 CMakeFiles/processSch.dir/src/student.c.o: CMakeFiles/processSch.dir/flags.make
 CMakeFiles/processSch.dir/src/student.c.o: ../src/student.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/processSch.dir/src/student.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/processSch.dir/src/student.c.o   -c /cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/src/student.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/processSch.dir/src/student.c.o"
+	C:/cygwin64/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/processSch.dir/src/student.c.o   -c /cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/src/student.c
 
 CMakeFiles/processSch.dir/src/student.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/processSch.dir/src/student.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/src/student.c > CMakeFiles/processSch.dir/src/student.c.i
+	C:/cygwin64/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/src/student.c > CMakeFiles/processSch.dir/src/student.c.i
 
 CMakeFiles/processSch.dir/src/student.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/processSch.dir/src/student.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/src/student.c -o CMakeFiles/processSch.dir/src/student.c.s
+	C:/cygwin64/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/src/student.c -o CMakeFiles/processSch.dir/src/student.c.s
 
 # Object files for target processSch
 processSch_OBJECTS = \
@@ -110,7 +110,7 @@ processSch.exe: CMakeFiles/processSch.dir/src/process.c.o
 processSch.exe: CMakeFiles/processSch.dir/src/student.c.o
 processSch.exe: CMakeFiles/processSch.dir/build.make
 processSch.exe: CMakeFiles/processSch.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable processSch.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable processSch.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/processSch.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -123,6 +123,6 @@ CMakeFiles/processSch.dir/clean:
 .PHONY : CMakeFiles/processSch.dir/clean
 
 CMakeFiles/processSch.dir/depend:
-	cd /cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch /cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch /cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/cmake-build-debug /cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/cmake-build-debug /cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/cmake-build-debug/CMakeFiles/processSch.dir/DependInfo.cmake --color=$(COLOR)
+	cd /cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch /cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch /cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/cmake-build-debug /cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/cmake-build-debug /cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/cmake-build-debug/CMakeFiles/processSch.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/processSch.dir/depend
 

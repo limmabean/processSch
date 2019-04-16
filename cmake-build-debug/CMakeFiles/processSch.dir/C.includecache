@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/src/os-sim.h
+/cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/src/os-sim.h
 
-/cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/src/student.c
+/cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/src/student.c
 assert.h
 -
 pthread.h
@@ -20,5 +20,5 @@ stdlib.h
 string.h
 -
 os-sim.h
-/cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/src/os-sim.h
+/cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/src/os-sim.h
 

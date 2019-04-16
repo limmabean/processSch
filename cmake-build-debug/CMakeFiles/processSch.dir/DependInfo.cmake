@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/src/os-sim.c" "/cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/cmake-build-debug/CMakeFiles/processSch.dir/src/os-sim.c.o"
-  "/cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/src/process.c" "/cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/cmake-build-debug/CMakeFiles/processSch.dir/src/process.c.o"
-  "/cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/src/student.c" "/cygdrive/c/Users/limma/OneDrive/Documents/GATECH/3056/processSch/cmake-build-debug/CMakeFiles/processSch.dir/src/student.c.o"
+  "/cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/src/os-sim.c" "/cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/cmake-build-debug/CMakeFiles/processSch.dir/src/os-sim.c.o"
+  "/cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/src/process.c" "/cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/cmake-build-debug/CMakeFiles/processSch.dir/src/process.c.o"
+  "/cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/src/student.c" "/cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/cmake-build-debug/CMakeFiles/processSch.dir/src/student.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

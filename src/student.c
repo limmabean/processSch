@@ -77,6 +77,7 @@ static void schedule(unsigned int cpu_id)
     pcb_t *readyQIterator = readyQHead;
     pcb_t *selectedProcess = readyQHead;
     // lets test the ready queue before schedule
+    pcb_t * prev = NULL;
     pcb_t *iter = readyQHead;
     printf("Schedule!!\n");
     while(iter!=NULL){
@@ -85,36 +86,30 @@ static void schedule(unsigned int cpu_id)
     }
     /* ======================FCFS====================== */
     if(scheduler_type == FCFS) {
-        if (readyQIterator != NULL) {
-            //If the readyQ only has one value
-            if (readyQIterator->next == NULL) {
-                //Set state to running
-                // [ RUNNING ] -> NULL
-                readyQIterator->state = PROCESS_RUNNING;
-                //Place the process into the running_processes
-                running_processes[cpu_id] = readyQIterator;
-                //Set selectedProcess to readyQIterator
-                selectedProcess = readyQIterator;
-                //Set readyQHead = NULL;
-                readyQHead = NULL;
-            } else {
-                //Iterate to second to the end;
-                // [ X ] -> [   ] -> NULL
-                while ((readyQIterator->next)->next != NULL) {
-                    readyQIterator = readyQIterator->next;
-                }
-                //Set the end's state to running
-                // [ X ] -> [running] -> NULL
-                (readyQIterator->next)->state = PROCESS_RUNNING;
-                //Remove the process from the end of the list by
-                //Place the process into the running_processes
-                running_processes[cpu_id] = readyQIterator->next;
-                selectedProcess = readyQIterator->next;
-                // [ X ] -> NULL
-                readyQIterator->next = NULL;
+        int min_PID = readyQIterator->pid;
+        // Search for the key to be deleted, keep track of the
+        // previous node as we need to change 'prev->next'
+        while (readyQIterator != NULL)
+        {
+            if (readyQIterator->pid < min_PID){
+                min_PID = readyQIterator->pid;
             }
+            readyQIterator = readyQIterator->next;
+        }
+        readyQIterator = readyQHead;
+        while (readyQIterator != NULL){
+            if(readyQIterator->pid == min_PID){
+                selectedProcess = readyQIterator;
+                break;
+            }
+            prev = readyQIterator;
+            readyQIterator = readyQIterator->next;
         }
 
+        // Unlink the node from linked list
+        if (prev != NULL) {
+            prev->next = selectedProcess->next;
+        }
     }
     /* ======================PRIORITY====================== */
     else if (scheduler_type == PRIORITYQ){
@@ -339,6 +334,7 @@ int main(int argc, char *argv[])
     cpu_count = atoi(argv[2]);
     // Allocate the running_processes[] array and its mutex */
     running_processes = malloc(sizeof(pcb_t*) * cpu_count);
+
     // Define the Head of Ready Queue
     readyQHead = malloc(sizeof(pcb_t*));
     readyQHead = NULL;
