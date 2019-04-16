@@ -4,8 +4,8 @@
  * Spring 2019
  *
  * This file contains the CPU scheduler for the simulation.
- * Name: 
- * GTID:
+ * Name: Matthew Lim
+ * GTID: 903211953
  */
 
 #include <assert.h>
@@ -15,6 +15,15 @@
 #include <string.h>
 
 #include "os-sim.h"
+/* Define which scheduler we are using.
+ * FCFS = 0
+ * Priority Queue = 1
+ * SJF = 2
+ */
+
+#define FCFS 0
+#define PRIORITYQ 1
+#define SJF 2
 
 /** Function prototypes **/
 extern void idle(unsigned int cpu_id);
@@ -40,6 +49,8 @@ static pthread_mutex_t running_processes_mutex;
 static pthread_mutex_t queue_mutex;
 static pthread_cond_t queue_not_empty;
 unsigned int cpu_count;
+unsigned int scheduler_type;
+
 
 
 /*
@@ -61,33 +72,74 @@ unsigned int cpu_count;
 static void schedule(unsigned int cpu_id)
 {
 	pthread_mutex_lock(&queue_mutex);
-	if(queue_not_empty) {
-		pcb_t *readyQIterator = readyQHead;
-		//If the readyQ only has one value (This is to prevent seg faults)
-        if(readyQIterator->next = NULL) {
-            //Set state to running
-            // [ RUNNING ] -> NULL
-            readyQIterator->state = PROCESS_RUNNING;
-            //Set readyQHead = NULL;
-            // NULL
-            readyQIterator = NULL;
-        } else {
-            //Iterate to second to the end;
-            // [ X ] -> [   ] -> NULL
-            while((readyQIterator->next)->next != NULL) {
-                readyQIterator = readyQIterator->next;
+    pthread_mutex_lock(&running_processes_mutex);
+    pcb_t *readyQIterator = readyQHead;
+    pcb_t *selectedProcess = readyQHead;
+    if(scheduler_type == FCFS) {
+        if (readyQIterator != NULL) {
+            //If the readyQ only has one value (This is to prevent seg faults)
+            if (readyQIterator->next = NULL) {
+                //Set state to running
+                // [ RUNNING ] -> NULL
+                readyQIterator->state = PROCESS_RUNNING;
+                //Place the process into the running_processes
+                running_processes[cpu_id] = readyQIterator;
+                //Set readyQHead = NULL;
+                // NULL
+                readyQHead = NULL;
             }
-            //Set the end's state to running
-            // [ X ] -> [running] -> NULL
-            (readyQIterator->next)->state = PROCESS_RUNNING;
-            //Remove the process from the end of the list by
-            // [ X ] -> NULL
-            readyQIterator->next = NULL;
+                //If readyQ has 2 or more values.
+            else {
+                //Iterate to second to the end;
+                // [ X ] -> [   ] -> NULL
+                while ((readyQIterator->next)->next != NULL) {
+                    readyQIterator = readyQIterator->next;
+                }
+                //Set the end's state to running
+                // [ X ] -> [running] -> NULL
+                (readyQIterator->next)->state = PROCESS_RUNNING;
+                //Remove the process from the end of the list by
+                //Place the process into the running_processes
+                running_processes[cpu_id] = readyQIterator->next;
+                // [ X ] -> NULL
+                readyQIterator->next = NULL;
+
+            }
         }
-        context_switch(cpu_id, readyQIterator);
-	} else {
-		context_switch(cpu_id, NULL);
-	}
+    } else if (scheduler_type == PRIORITYQ){
+        if(readyQIterator != NULL){
+            // When there is only one element in the queue
+            if (readyQIterator->next == NULL){
+                running_processes[cpu_id] = readyQIterator;
+                readyQHead = NULL;
+            } else{
+                // Since we have a linked list we have to change the node before it.
+                int max_Priority = readyQIterator->priority;
+                // selectedProcess: This finds the node before the node with the highest priority
+                while ((readyQIterator->next)->next != NULL){
+                    if(((readyQIterator->next)->priority) > max_Priority){
+                        max_Priority = (readyQIterator->next)->priority;
+                        selectedProcess = readyQIterator;
+                    }
+                    readyQIterator = readyQIterator->next;
+                }
+                // Set readyQIterator to the node before highest priority process
+                readyQIterator = selectedProcess;
+                // Sets selectedProcess to the actual highest priority process
+                selectedProcess = (selectedProcess->next);
+                // Delete the node from the queue
+                readyQIterator->next = (readyQIterator->next)->next;
+                // Delete the next ref from scheduled process
+                selectedProcess->next = NULL;
+                // Place on running_processes
+                running_processes[cpu_id] = (selectedProcess);
+            }
+        }
+    } else {
+
+    }
+    context_switch(cpu_id, selectedProcess);
+    pthread_mutex_unlock(&running_processes_mutex);
 	pthread_mutex_unlock(&queue_mutex);
 }
 
@@ -119,27 +171,30 @@ extern void idle(unsigned int cpu_id)
  */
 extern void preempt(unsigned int cpu_id)
 {
-    //Lock the queue
+    // Lock the queue & running processes
     pthread_mutex_lock(&queue_mutex);
+    pthread_mutex_lock(&running_processes_mutex);
     pcb_t *readyQIterator = readyQHead;
+    // If the readyQ is empty preempt should trigger queue_not_empty
     if (readyQHead == NULL) {
-
+        readyQIterator = running_processes[cpu_id];
+        running_processes[cpu_id] = NULL;
+        readyQHead = readyQIterator;
+        pthread_cond_signal(&queue_not_empty);
     } else {
         //Iterate to the end;
         while(readyQIterator->next != NULL) {
             readyQIterator = readyQIterator->next;
         }
-        //Lock the running processes
-        pthread_mutex_lock(&running_processes_mutex);
-        //Place the running process into the readyQ
+        // Lock the running processes
+        // Place the running process into the readyQ
         readyQIterator->next = running_processes[cpu_id];
-        //Set it's state to ready
+        // Set it's state to ready
         (readyQIterator->next)->state = PROCESS_READY;
-        //Unlock the running processes
-        pthread_mutex_unlock(&running_processes_mutex);
-        //Unlock the queue
-        pthread_mutex_unlock(&queue_mutex);
     }
+    // Unlock the queue & running processes
+    pthread_mutex_unlock(&running_processes_mutex);
+    pthread_mutex_unlock(&queue_mutex);
     schedule(cpu_id);
 }
 
@@ -153,15 +208,11 @@ extern void preempt(unsigned int cpu_id)
  */
 extern void yield(unsigned int cpu_id)
 {
-    //Lock the running processes
+    // Same comments as terminate
     pthread_mutex_lock(&running_processes_mutex);
-    //Get the process currently running
     pcb_t *currentProcess = running_processes[cpu_id];
-    //Set the state as waiting
     currentProcess->state = PROCESS_WAITING;
-    //Unlock the running processes
     pthread_mutex_unlock(&running_processes_mutex);
-    //Call schedule() to select new process
     schedule(cpu_id);
 }
 
@@ -173,15 +224,15 @@ extern void yield(unsigned int cpu_id)
  */
 extern void terminate(unsigned int cpu_id)
 {
-    //Lock the running processes
+    // Lock the running processes
     pthread_mutex_lock(&running_processes_mutex);
-    //Get the process currently running
+    // Get the process currently running
 	pcb_t *currentProcess = running_processes[cpu_id];
-	//Set the state as finished
+	// Set the state as finished
 	currentProcess->state = PROCESS_TERMINATED;
-	//Unlock the running processes
+	// Unlock the running processes
     pthread_mutex_unlock(&running_processes_mutex);
-    //Call schedule() to select new process
+    // Call schedule() to select new process
 	schedule(cpu_id);
 }
 
@@ -202,20 +253,20 @@ extern void terminate(unsigned int cpu_id)
  */
 extern void wake_up(pcb_t *process)
 {
-    //IF EMPTY/NOTHING IN QUEUE
+    printf(process->name);
+    printf("\n");
+    // IF EMPTY/NOTHING IN QUEUE
     if(readyQHead == NULL) {
-        //FIFO
-        //Mark the process as ready
+        // Mark the process as ready
         process->state = PROCESS_READY;
-        //Insert into ready queue [new process] -> [old process]
-        process->next = readyQHead;
+        // Insert into ready queue readyQHead -> [new process]
         readyQHead = process;
         pthread_cond_signal(&queue_not_empty);
     } else {
-        //FIFO
-        //Mark the process as ready
+        // Linked List that adds to the beginning
+        // Mark the process as ready
         process->state = PROCESS_READY;
-        //Insert into ready queue [new process] -> [old process]
+        // Insert into ready queue [new process] -> [old process]
         process->next = readyQHead;
         readyQHead = process;
     }
@@ -229,12 +280,22 @@ extern void wake_up(pcb_t *process)
  */
 int main(int argc, char *argv[])
 {
-
-    /* Uncomment this block once you have parsed the command line arguments
-        to start scheduling yout processes
+    //Parse scheduler type
+    if(strcmp(argv[1],"-f") == 0) {
+        scheduler_type = FCFS;
+    } else if (strcmp(argv[1],"-p") == 0) {
+        scheduler_type = PRIORITYQ;
+        printf("Lol");
+    } else if (strcmp(argv[1],"-s") == 0) {
+        scheduler_type = SJF;
+    } else {
+        printf("Must input a correct scheduler type!");
+    }
+    //Parse cpu_count (sim has handler)
+    cpu_count = atoi(argv[2]);
     // Allocate the running_processes[] array and its mutex */
     running_processes = malloc(sizeof(pcb_t*) * cpu_count);
-    //Define the Head of Ready Queue
+    // Define the Head of Ready Queue
     readyQHead = malloc(sizeof(pcb_t*));
 
     assert(running_processes != NULL);
@@ -245,9 +306,6 @@ int main(int argc, char *argv[])
     /* Start the simulator in the library */
     start_simulator(cpu_count);
 
-    pthread_mutex_destroy(&running_processes_mutex);
-    pthread_mutex_init(&queue_mutex, NULL);
-    pthread_cond_destroy(&queue_not_empty);
     return 0;
 }
 

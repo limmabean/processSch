@@ -19,7 +19,7 @@ static op_t pid0_ops[] = {
     { OP_CPU, 4 },
     { OP_IO, 5 },
     { OP_CPU, 2 },
-    { OP_IO, 1 },
+    /*{ OP_IO, 1 },
     { OP_CPU, 2 },
     { OP_IO, 3 },
     { OP_CPU, 5 },
@@ -44,7 +44,7 @@ static op_t pid0_ops[] = {
     { OP_IO, 2 },
     { OP_CPU, 3 },
     { OP_IO, 2 },
-    { OP_CPU, 4 },
+    { OP_CPU, 4 },*/
     { OP_TERMINATE, 0 }
 };
 
@@ -52,7 +52,7 @@ static op_t pid1_ops[] = {
     { OP_CPU, 2 },
     { OP_IO, 3 },
     { OP_CPU, 1 },
-    { OP_IO, 5 },
+    /*{ OP_IO, 5 },
     { OP_CPU, 7 },
     { OP_IO, 3 },
     { OP_CPU, 2 },
@@ -75,7 +75,7 @@ static op_t pid1_ops[] = {
     { OP_IO, 3 },
     { OP_CPU, 4 },
     { OP_IO, 2 },
-    { OP_CPU, 1 },
+    { OP_CPU, 1 },*/
     { OP_TERMINATE, 0 }
 };
 
@@ -83,7 +83,7 @@ static op_t pid2_ops[] = {
     { OP_CPU, 2 },
     { OP_IO, 3 },
     { OP_CPU, 4 },
-    { OP_IO, 6 },
+    /*{ OP_IO, 6 },
     { OP_CPU, 2 },
     { OP_IO, 7 },
     { OP_CPU, 2 },
@@ -104,7 +104,7 @@ static op_t pid2_ops[] = {
     { OP_IO, 3 },
     { OP_CPU, 2 },
     { OP_IO, 4 },
-    { OP_CPU, 4 },
+    { OP_CPU, 4 },*/
     { OP_TERMINATE, 0 }
 };
 
@@ -227,11 +227,11 @@ pcb_t processes[PROCESS_COUNT] = {
     { 0, "Montpelier", 96, PROCESS_NEW, pid0_ops, NULL, 5 },
     { 1, "Pierre", 80, PROCESS_NEW, pid1_ops, NULL, 1 },
     { 2, "Hartford", 89, PROCESS_NEW, pid2_ops, NULL, 6 },
-    { 3, "Lansing", 99, PROCESS_NEW, pid3_ops, NULL, 8 },
+    /*{ 3, "Lansing", 99, PROCESS_NEW, pid3_ops, NULL, 8 },
     { 4, "Helena", 130, PROCESS_NEW, pid4_ops, NULL, 2 },
     { 5, "Concord",127, PROCESS_NEW, pid5_ops, NULL, 7 },
     { 6, "Trenton", 159, PROCESS_NEW, pid6_ops, NULL, 3 },
-    { 7, "Bismark", 109, PROCESS_NEW, pid7_ops, NULL, 4 }
+    { 7, "Bismark", 109, PROCESS_NEW, pid7_ops, NULL, 4 }*/
 };
 
 
