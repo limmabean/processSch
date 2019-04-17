@@ -77,6 +77,7 @@ static void schedule(unsigned int cpu_id)
     pcb_t *readyQIterator = readyQHead;
     pcb_t *selectedProcess = readyQHead;
 
+    /*
     // lets test the ready queue before schedule
     pcb_t * prev = NULL;
     pcb_t *iter = readyQHead;
@@ -84,7 +85,7 @@ static void schedule(unsigned int cpu_id)
     while(iter!=NULL){
         printf("Name: %s, PID: %d, Priority: %d\n", iter->name, iter->pid, iter->priority);
         iter = iter->next;
-    }
+    }*/
 
     /* ============================================================FCFS============================================= */
     if(scheduler_type == FCFS) {
@@ -133,7 +134,7 @@ static void schedule(unsigned int cpu_id)
             int max_Priority = readyQIterator->priority;
             // This finds the max_Priority in the queue
             while(readyQIterator != NULL){
-                if(readyQIterator->priority > max_Priority){ max_Priority = readyQIterator->priority; }
+                if(readyQIterator->priority < max_Priority){ max_Priority = readyQIterator->priority; }
                 readyQIterator= readyQIterator->next;
             }
             // This finds the node before max_Priority in the queue
@@ -168,11 +169,11 @@ static void schedule(unsigned int cpu_id)
             }
         }
     }
-    /* =======================SJF====================== */
+    /* =======================SJF======================
     else if (scheduler_type == SJF){
 
 
-    } else {
+    }*/ else {
         printf("Incorrect type.");
     }
     context_switch(cpu_id, selectedProcess);
@@ -225,10 +226,12 @@ extern void preempt(unsigned int cpu_id)
         readyQHead = preemptedProcess;
     }
 
+    /*
     //Lets test ready queue after preempt
     pcb_t *iter = readyQHead;
     printf("Preempt!!\n");
     while(iter!=NULL){ printf("Name: %s, PID: %d, Priority: %d\n", iter->name, iter->pid, iter->priority);iter = iter->next;}
+     */
 
     // Unlock the queue & running processes
     pthread_mutex_unlock(&running_processes_mutex);
@@ -274,8 +277,10 @@ extern void terminate(unsigned int cpu_id)
 	currentProcess->state = PROCESS_TERMINATED;
 	running_processes[cpu_id] = NULL;
 	// Unlock the running processes
+	/*
 	printf("TERMINATED");
 	printf(currentProcess->name);
+	 */
     pthread_mutex_unlock(&running_processes_mutex);
     pthread_mutex_unlock(&queue_mutex);
     // Call schedule() to select new process
@@ -317,6 +322,13 @@ extern void wake_up(pcb_t *process)
         pthread_cond_signal(&queue_not_empty);
     }
 
+    //Lets test ready queue after wake up
+    /*
+    pcb_t* iter = readyQHead;
+    printf("Wakeup!!\n");
+    while(iter!=NULL){printf("Name: %s, PID: %d, Priority: %d\n", iter->name, iter->pid, iter->priority);iter = iter->next;}
+    */
+
     if(scheduler_type == PRIORITYQ) {
         int noFreeCPU = 1;
         int lowestPriority = process->priority;
@@ -327,22 +339,18 @@ extern void wake_up(pcb_t *process)
                 noFreeCPU = 0;
             } else {
                 // Run through the running processes to find the lowest priority
-                if ((running_processes[i])->priority < lowestPriority) {
+                if ((running_processes[i])->priority > lowestPriority) {
                     lowestPriority = (running_processes[i])->priority;
                     lowestPriorityCPU = i;
                 }
             }
         }
         // If there are no free CPU's and the lowest priority is less than the new process's then preempt
-        if (noFreeCPU == 1 && lowestPriority < process->priority) {
+        if (noFreeCPU == 1 && lowestPriority > process->priority) {
             force_preempt(lowestPriorityCPU);
         }
     }
 
-    //Lets test ready queue after wake up
-    pcb_t* iter = readyQHead;
-    printf("Wakeup!!\n");
-    while(iter!=NULL){printf("Name: %s, PID: %d, Priority: %d\n", iter->name, iter->pid, iter->priority);iter = iter->next;}
 
     pthread_mutex_unlock(&running_processes_mutex);
     pthread_mutex_unlock(&queue_mutex);

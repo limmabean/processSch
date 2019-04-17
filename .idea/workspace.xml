@@ -12,6 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e3188714-380f-4bdf-bc22-052dc7a3c4e7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/student.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/student.c" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -41,8 +42,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/student.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2726">
-              <caret line="220" column="12" lean-forward="true" selection-start-line="220" selection-start-column="12" selection-end-line="220" selection-end-column="12" />
+            <state relative-caret-position="235">
+              <caret line="282" column="7" selection-start-line="282" selection-start-column="7" selection-end-line="282" selection-end-column="7" />
               <folding>
                 <element signature="e#183#202#0" expanded="true" />
               </folding>
@@ -76,8 +77,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/os-sim.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="419" lean-forward="true" selection-start-line="419" selection-end-line="419" />
+            <state relative-caret-position="206">
+              <caret line="407" column="37" lean-forward="true" selection-start-line="407" selection-start-column="37" selection-end-line="407" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -85,8 +86,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/os-sim.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-13">
-              <caret line="67" column="30" lean-forward="true" selection-start-line="67" selection-start-column="30" selection-end-line="67" selection-end-column="30" />
+            <state relative-caret-position="197">
+              <caret line="73" column="34" selection-start-line="73" selection-start-column="32" selection-end-line="73" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -106,7 +107,6 @@
       <find>lol</find>
       <find>idle</find>
       <find>whatt</find>
-      <find>printf</find>
       <find>free</find>
       <find>force</find>
       <find>term</find>
@@ -118,6 +118,11 @@
       <find>lock</find>
       <find>readyQ</find>
       <find>terminated</find>
+      <find>&gt;</find>
+      <find>&lt;</find>
+      <find>&lt;</find>
+      <find>pr</find>
+      <find>printf</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -134,10 +139,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="4154" />
-    <option name="y" value="-200" />
-    <option name="width" value="972" />
-    <option name="height" value="1046" />
+    <option name="x" value="-9" />
+    <option name="width" value="1562" />
+    <option name="height" value="1809" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -181,7 +185,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="CMake Application.os-sim">
+  <component name="RunManager" selected="CMake Application.processSch">
     <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-f 2" PASS_PARENT_ENVS_2="true" PROJECT_NAME="processSch" TARGET_NAME="processSch" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="processSch" RUN_TARGET_NAME="processSch">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -222,12 +226,12 @@
       <workItem from="1555436892216" duration="3294000" />
       <workItem from="1555447481180" duration="8377000" />
       <workItem from="1555459668518" duration="359000" />
-      <workItem from="1555460056833" duration="17581000" />
+      <workItem from="1555460056833" duration="19618000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102552000" />
+    <option name="totallyTimeSpent" value="104589000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -239,24 +243,25 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="3192" y="-208" width="1936" height="1056" extended-state="6" />
+    <frame x="-7" y="-7" width="2073" height="1215" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15031983" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14008942" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32963988" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.5254605" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.40086675" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.37950137" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4007387" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32719395" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.27952328" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.2811918" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50056624" side_tool="true" weight="0.32914045" />
       <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49943376" weight="0.32914045" />
-      <window_info anchor="bottom" id="CMake" order="11" weight="0.29144096" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.31960997" />
+      <window_info anchor="bottom" id="CMake" order="11" weight="0.2914339" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.31855956" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -399,13 +404,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/os-sim.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-13">
-          <caret line="67" column="30" lean-forward="true" selection-start-line="67" selection-start-column="30" selection-end-line="67" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/cygwin64/usr/src/debug/cygwin-3.0.6-1/winsup/cygwin/thread.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="197">
@@ -429,15 +427,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/os-sim.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="419" lean-forward="true" selection-start-line="419" selection-end-line="419" />
+        <state relative-caret-position="206">
+          <caret line="407" column="37" lean-forward="true" selection-start-line="407" selection-start-column="37" selection-end-line="407" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/os-sim.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="73" column="34" selection-start-line="73" selection-start-column="32" selection-end-line="73" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/student.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2726">
-          <caret line="220" column="12" lean-forward="true" selection-start-line="220" selection-start-column="12" selection-end-line="220" selection-end-column="12" />
+        <state relative-caret-position="235">
+          <caret line="282" column="7" selection-start-line="282" selection-start-column="7" selection-end-line="282" selection-end-column="7" />
           <folding>
             <element signature="e#183#202#0" expanded="true" />
           </folding>
