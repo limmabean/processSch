@@ -105,6 +105,7 @@ static void schedule(unsigned int cpu_id)
             }
             //If there is only one value in readyQ
             if(readyQHead->next == NULL){
+                selectedProcess->state = PROCESS_RUNNING;
                 running_processes[cpu_id] = selectedProcess;
                 readyQHead = NULL;
             } else {
@@ -113,12 +114,14 @@ static void schedule(unsigned int cpu_id)
                     selectedProcess = readyQHead;
                     readyQHead = readyQHead->next;
                     selectedProcess->next = NULL;
+                    selectedProcess->state = PROCESS_RUNNING;
                     running_processes[cpu_id] = selectedProcess;
                 } else {
                     selectedProcess = (readyQIterator->next);
                     // Set node before min_PID's next to selectedProcesses's next
                     readyQIterator->next = selectedProcess->next;
                     selectedProcess->next = NULL;
+                    selectedProcess->state = PROCESS_RUNNING;
                     running_processes[cpu_id] = selectedProcess;
                 }
             }
@@ -126,32 +129,42 @@ static void schedule(unsigned int cpu_id)
     }
     /* ======================================================PRIORITY=============================================== */
     else if (scheduler_type == PRIORITYQ){
-        if(readyQIterator != NULL){
-            // When there is only one element in the queue
-            if (readyQIterator->next == NULL){
-                running_processes[cpu_id] = readyQIterator;
-                readyQHead = NULL;
-            } else{
-                // Since we have a linked list we have to change the node before it.
-                int max_Priority = readyQIterator->priority;
-                // selectedProcess: This finds the node before the node with the highest priority
-                while ((readyQIterator->next)->next != NULL){
-                    if(((readyQIterator->next)->priority) > max_Priority){
-                        max_Priority = (readyQIterator->next)->priority;
-                        selectedProcess = readyQIterator;
-                    }
-                    readyQIterator = readyQIterator->next;
+        if (readyQIterator != NULL) {
+            int max_Priority = readyQIterator->priority;
+            // This finds the max_Priority in the queue
+            while(readyQIterator != NULL){
+                if(readyQIterator->priority > max_Priority){ max_Priority = readyQIterator->priority; }
+                readyQIterator= readyQIterator->next;
+            }
+            // This finds the node before max_Priority in the queue
+            readyQIterator = readyQHead;
+            while(readyQIterator->next != NULL) {
+                if((readyQIterator->next)->priority == max_Priority) {
+                    break;
                 }
-                // Set readyQIterator to the node before highest priority process
-                readyQIterator = selectedProcess;
-                // Sets selectedProcess to the actual highest priority process
-                selectedProcess = (selectedProcess->next);
-                // Delete the node from the queue
-                readyQIterator->next = (readyQIterator->next)->next;
-                // Delete the next ref from scheduled process
-                selectedProcess->next = NULL;
-                // Place on running_processes
-                running_processes[cpu_id] = (selectedProcess);
+                readyQIterator = readyQIterator->next;
+            }
+            //If there is only one value in readyQ
+            if(readyQHead->next == NULL){
+                selectedProcess->state = PROCESS_RUNNING;
+                running_processes[cpu_id] = selectedProcess;
+                readyQHead = NULL;
+            } else {
+                // If the selectedProcess is the head but there is another value
+                if(readyQHead->priority == max_Priority){
+                    selectedProcess = readyQHead;
+                    readyQHead = readyQHead->next;
+                    selectedProcess->next = NULL;
+                    selectedProcess->state = PROCESS_RUNNING;
+                    running_processes[cpu_id] = selectedProcess;
+                } else {
+                    selectedProcess = (readyQIterator->next);
+                    // Set node before min_PID's next to selectedProcesses's next
+                    readyQIterator->next = selectedProcess->next;
+                    selectedProcess->next = NULL;
+                    selectedProcess->state = PROCESS_RUNNING;
+                    running_processes[cpu_id] = selectedProcess;
+                }
             }
         }
     }
@@ -196,35 +209,27 @@ extern void idle(unsigned int cpu_id)
 extern void preempt(unsigned int cpu_id)
 {
     // Lock the queue & running processes
-    pthread_mutex_lock(&queue_mutex);
-    pthread_mutex_lock(&running_processes_mutex);
-    pcb_t *readyQIterator = readyQHead;
+    // Take process out of running_processes
+    pcb_t *preemptedProcess = running_processes[cpu_id];
+    running_processes[cpu_id] = NULL;
+    // Mark the process as ready
+    preemptedProcess->state = PROCESS_READY;
     // If the readyQ is empty preempt should trigger queue_not_empty
     if (readyQHead == NULL) {
-        readyQIterator = running_processes[cpu_id];
-        running_processes[cpu_id] = NULL;
-        readyQHead = readyQIterator;
+        readyQHead = preemptedProcess;
         pthread_cond_signal(&queue_not_empty);
     } else {
-        //TODO: Put in front
-        //Iterate to the end;
-        while(readyQIterator->next != NULL) {
-            readyQIterator = readyQIterator->next;
-        }
-        // Lock the running processes
-        // Place the running process into the readyQ
-        readyQIterator->next = running_processes[cpu_id];
-        running_processes[cpu_id] = NULL;
-        // Set it's state to ready
-        (readyQIterator->next)->state = PROCESS_READY;
+        // Linked List that adds to the beginning
+        // Insert into ready queue [new process] -> [old process]
+        preemptedProcess->next = readyQHead;
+        readyQHead = preemptedProcess;
     }
+
     //Lets test ready queue after preempt
     pcb_t *iter = readyQHead;
     printf("Preempt!!\n");
-    while(iter!=NULL){
-        printf("Name: %s, PID: %d, Priority: %d\n", iter->name, iter->pid, iter->priority);
-        iter = iter->next;
-    }
+    while(iter!=NULL){ printf("Name: %s, PID: %d, Priority: %d\n", iter->name, iter->pid, iter->priority);iter = iter->next;}
+
     // Unlock the queue & running processes
     pthread_mutex_unlock(&running_processes_mutex);
     pthread_mutex_unlock(&queue_mutex);
@@ -246,6 +251,7 @@ extern void yield(unsigned int cpu_id)
     pthread_mutex_lock(&running_processes_mutex);
     pcb_t *currentProcess = running_processes[cpu_id];
     currentProcess->state = PROCESS_WAITING;
+    running_processes[cpu_id] = NULL;
     pthread_mutex_unlock(&running_processes_mutex);
     pthread_mutex_unlock(&queue_mutex);
     schedule(cpu_id);
@@ -266,6 +272,7 @@ extern void terminate(unsigned int cpu_id)
 	pcb_t *currentProcess = running_processes[cpu_id];
 	// Set the state as finished
 	currentProcess->state = PROCESS_TERMINATED;
+	running_processes[cpu_id] = NULL;
 	// Unlock the running processes
 	printf("TERMINATED");
 	printf(currentProcess->name);
@@ -310,10 +317,33 @@ extern void wake_up(pcb_t *process)
         pthread_cond_signal(&queue_not_empty);
     }
 
+    if(scheduler_type == PRIORITYQ) {
+        int noFreeCPU = 1;
+        int lowestPriority = process->priority;
+        int lowestPriorityCPU = -1;
+        for (int i = 0; i < cpu_count; i++) {
+            // If any of the running processes are NULL then there is a Free CPU
+            if (running_processes[i] == NULL) {
+                noFreeCPU = 0;
+            } else {
+                // Run through the running processes to find the lowest priority
+                if ((running_processes[i])->priority < lowestPriority) {
+                    lowestPriority = (running_processes[i])->priority;
+                    lowestPriorityCPU = i;
+                }
+            }
+        }
+        // If there are no free CPU's and the lowest priority is less than the new process's then preempt
+        if (noFreeCPU == 1 && lowestPriority < process->priority) {
+            force_preempt(lowestPriorityCPU);
+        }
+    }
+
     //Lets test ready queue after wake up
     pcb_t* iter = readyQHead;
     printf("Wakeup!!\n");
     while(iter!=NULL){printf("Name: %s, PID: %d, Priority: %d\n", iter->name, iter->pid, iter->priority);iter = iter->next;}
+
     pthread_mutex_unlock(&running_processes_mutex);
     pthread_mutex_unlock(&queue_mutex);
 }
@@ -339,7 +369,9 @@ int main(int argc, char *argv[])
     cpu_count = atoi(argv[2]);
     // Allocate the running_processes[] array and its mutex */
     running_processes = malloc(sizeof(pcb_t*) * cpu_count);
-
+    for(int i = 0; i < cpu_count; i++) {
+        running_processes[i] = NULL;
+    }
     // Define the Head of Ready Queue
     readyQHead = malloc(sizeof(pcb_t*));
     readyQHead = NULL;
@@ -350,7 +382,7 @@ int main(int argc, char *argv[])
 
     /* Start the simulator in the library */
     start_simulator(cpu_count);
-
+    free(readyQHead);
     return 0;
 }
 

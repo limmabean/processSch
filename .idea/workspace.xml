@@ -12,11 +12,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e3188714-380f-4bdf-bc22-052dc7a3c4e7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/processSch.dir/src/process.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/processSch.dir/src/process.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/processSch.dir/src/student.c.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/processSch.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/processSch.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/processSch.exe.stackdump" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/processSch.exe.stackdump" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/student.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/student.c" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -43,11 +38,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/student.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="96" column="13" selection-start-line="96" selection-start-column="13" selection-end-line="96" selection-end-column="13" />
+            <state relative-caret-position="-2726">
+              <caret line="220" column="12" lean-forward="true" selection-start-line="220" selection-start-column="12" selection-end-line="220" selection-end-column="12" />
               <folding>
                 <element signature="e#183#202#0" expanded="true" />
               </folding>
@@ -69,11 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/process.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="23" column="4" lean-forward="true" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
+            <state relative-caret-position="-399">
+              <caret line="21" column="17" lean-forward="true" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -81,8 +76,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/os-sim.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="260" selection-start-line="260" selection-end-line="260" />
+            <state relative-caret-position="434">
+              <caret line="419" lean-forward="true" selection-start-line="419" selection-end-line="419" />
             </state>
           </provider>
         </entry>
@@ -90,8 +85,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/os-sim.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="538">
-              <caret line="76" column="2" selection-start-line="76" selection-start-column="2" selection-end-line="76" selection-end-column="2" />
+            <state relative-caret-position="-13">
+              <caret line="67" column="30" lean-forward="true" selection-start-line="67" selection-start-column="30" selection-end-line="67" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -133,8 +128,8 @@
       <list>
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/src/process.h" />
-        <option value="$PROJECT_DIR$/src/student.c" />
         <option value="$PROJECT_DIR$/src/process.c" />
+        <option value="$PROJECT_DIR$/src/student.c" />
       </list>
     </option>
   </component>
@@ -186,13 +181,13 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="CMake Application.processSch">
+  <component name="RunManager" selected="CMake Application.os-sim">
     <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-f 2" PASS_PARENT_ENVS_2="true" PROJECT_NAME="processSch" TARGET_NAME="processSch" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="processSch" RUN_TARGET_NAME="processSch">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="os-sim" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-p 2" PASS_PARENT_ENVS_2="true" PROJECT_NAME="processSch" TARGET_NAME="processSch" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="processSch" RUN_TARGET_NAME="processSch">
+    <configuration name="os-sim" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-p 1" PASS_PARENT_ENVS_2="true" PROJECT_NAME="processSch" TARGET_NAME="processSch" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="processSch" RUN_TARGET_NAME="processSch">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -227,12 +222,12 @@
       <workItem from="1555436892216" duration="3294000" />
       <workItem from="1555447481180" duration="8377000" />
       <workItem from="1555459668518" duration="359000" />
-      <workItem from="1555460056833" duration="872000" />
+      <workItem from="1555460056833" duration="17581000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85843000" />
+    <option name="totallyTimeSpent" value="102552000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -245,18 +240,17 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="3192" y="-208" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15031983" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32963988" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3856988" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.5254605" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.40086675" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.3281412" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32719395" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.27952328" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50056624" side_tool="true" weight="0.32914045" />
@@ -326,13 +320,50 @@
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
         <watch expression="readyQHead" language="ObjectiveC" />
-        <watch expression="running_processes[cpu_id]" language="ObjectiveC" />
-        <watch expression="selectedProcess-&gt;name" language="ObjectiveC" />
+        <watch expression="running_processes[0]-&gt;state" language="ObjectiveC" />
+        <watch expression="running_processes[0]-&gt;name" language="ObjectiveC" />
+        <watch expression="running_processes[1]-&gt;state" language="ObjectiveC" />
+        <watch expression="running_processes[1]-&gt;name" language="ObjectiveC" />
       </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
+      <expression>
+        <expression-string>running_processes[1]-&gt;name</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>running_processes[1]-&gt;state</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>running_processes[0]-&gt;name</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>running_processes[0]-&gt;state</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>running_processes[1]</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>running_processes[0]</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>running_processes[i]</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>running_processes[cpu_id]</expression-string>
         <language-id>ObjectiveC</language-id>
@@ -348,31 +379,9 @@
         <language-id>ObjectiveC</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>readyQHead-&gt;next</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>readyQHead-&gt;name</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>readyQHead</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://C:/cygwin64/usr/src/debug/cygwin-3.0.6-1/winsup/cygwin/thread.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="1815" selection-start-line="1815" selection-end-line="1815" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -390,34 +399,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/os-sim.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="260" selection-start-line="260" selection-end-line="260" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/os-sim.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="76" column="2" selection-start-line="76" selection-start-column="2" selection-end-line="76" selection-end-column="2" />
+        <state relative-caret-position="-13">
+          <caret line="67" column="30" lean-forward="true" selection-start-line="67" selection-start-column="30" selection-end-line="67" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/student.c">
+    <entry file="file://C:/cygwin64/usr/src/debug/cygwin-3.0.6-1/winsup/cygwin/thread.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="96" column="13" selection-start-line="96" selection-start-column="13" selection-end-line="96" selection-end-column="13" />
-          <folding>
-            <element signature="e#183#202#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="197">
+          <caret line="135" selection-start-line="135" selection-end-line="135" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/cygwin64/usr/src/debug/cygwin-3.0.6-1/winsup/cygwin/cygtls.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="304" selection-start-line="304" selection-end-line="304" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/process.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="23" column="4" lean-forward="true" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
+        <state relative-caret-position="-399">
+          <caret line="21" column="17" lean-forward="true" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/os-sim.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="419" lean-forward="true" selection-start-line="419" selection-end-line="419" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/student.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2726">
+          <caret line="220" column="12" lean-forward="true" selection-start-line="220" selection-start-column="12" selection-end-line="220" selection-end-column="12" />
+          <folding>
+            <element signature="e#183#202#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
