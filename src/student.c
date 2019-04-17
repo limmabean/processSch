@@ -76,6 +76,7 @@ static void schedule(unsigned int cpu_id)
     pthread_mutex_lock(&running_processes_mutex);
     pcb_t *readyQIterator = readyQHead;
     pcb_t *selectedProcess = readyQHead;
+
     // lets test the ready queue before schedule
     pcb_t * prev = NULL;
     pcb_t *iter = readyQHead;
@@ -84,34 +85,46 @@ static void schedule(unsigned int cpu_id)
         printf("Name: %s, PID: %d, Priority: %d\n", iter->name, iter->pid, iter->priority);
         iter = iter->next;
     }
-    /* ======================FCFS====================== */
-    if(scheduler_type == FCFS) {
-        int min_PID = readyQIterator->pid;
-        // Search for the key to be deleted, keep track of the
-        // previous node as we need to change 'prev->next'
-        while (readyQIterator != NULL)
-        {
-            if (readyQIterator->pid < min_PID){
-                min_PID = readyQIterator->pid;
-            }
-            readyQIterator = readyQIterator->next;
-        }
-        readyQIterator = readyQHead;
-        while (readyQIterator != NULL){
-            if(readyQIterator->pid == min_PID){
-                selectedProcess = readyQIterator;
-                break;
-            }
-            prev = readyQIterator;
-            readyQIterator = readyQIterator->next;
-        }
 
-        // Unlink the node from linked list
-        if (prev != NULL) {
-            prev->next = selectedProcess->next;
+    /* ============================================================FCFS============================================= */
+    if(scheduler_type == FCFS) {
+        if (readyQIterator != NULL) {
+            unsigned int min_PID = readyQIterator->pid;
+            // This finds the min_PID in the queue
+            while(readyQIterator != NULL){
+                if(readyQIterator->pid < min_PID){ min_PID = readyQIterator->pid; }
+                readyQIterator= readyQIterator->next;
+            }
+            // This finds the node before min_PID in the queue
+            readyQIterator = readyQHead;
+            while(readyQIterator->next != NULL) {
+                if((readyQIterator->next)->pid == min_PID) {
+                    break;
+                }
+                readyQIterator = readyQIterator->next;
+            }
+            //If there is only one value in readyQ
+            if(readyQHead->next == NULL){
+                running_processes[cpu_id] = selectedProcess;
+                readyQHead = NULL;
+            } else {
+                // If the selectedProcess is the head but there is another value
+                if(readyQHead->pid == min_PID){
+                    selectedProcess = readyQHead;
+                    readyQHead = readyQHead->next;
+                    selectedProcess->next = NULL;
+                    running_processes[cpu_id] = selectedProcess;
+                } else {
+                    selectedProcess = (readyQIterator->next);
+                    // Set node before min_PID's next to selectedProcesses's next
+                    readyQIterator->next = selectedProcess->next;
+                    selectedProcess->next = NULL;
+                    running_processes[cpu_id] = selectedProcess;
+                }
+            }
         }
     }
-    /* ======================PRIORITY====================== */
+    /* ======================================================PRIORITY=============================================== */
     else if (scheduler_type == PRIORITYQ){
         if(readyQIterator != NULL){
             // When there is only one element in the queue
@@ -170,7 +183,6 @@ extern void idle(unsigned int cpu_id)
     }
     pthread_mutex_unlock(&queue_mutex);
     schedule(cpu_id);
-    return;
 }
 
 
@@ -234,7 +246,6 @@ extern void yield(unsigned int cpu_id)
     pthread_mutex_lock(&running_processes_mutex);
     pcb_t *currentProcess = running_processes[cpu_id];
     currentProcess->state = PROCESS_WAITING;
-    running_processes[cpu_id] = NULL;
     pthread_mutex_unlock(&running_processes_mutex);
     pthread_mutex_unlock(&queue_mutex);
     schedule(cpu_id);
@@ -255,8 +266,9 @@ extern void terminate(unsigned int cpu_id)
 	pcb_t *currentProcess = running_processes[cpu_id];
 	// Set the state as finished
 	currentProcess->state = PROCESS_TERMINATED;
-    running_processes[cpu_id] = NULL;
 	// Unlock the running processes
+	printf("TERMINATED");
+	printf(currentProcess->name);
     pthread_mutex_unlock(&running_processes_mutex);
     pthread_mutex_unlock(&queue_mutex);
     // Call schedule() to select new process
@@ -280,7 +292,6 @@ extern void terminate(unsigned int cpu_id)
  */
 extern void wake_up(pcb_t *process)
 {
-    //TODO: If priority is higher call force pre-empt.
     pthread_mutex_lock(&queue_mutex);
     pthread_mutex_lock(&running_processes_mutex);
     // IF SOMETHING IN QUEUE
@@ -302,15 +313,9 @@ extern void wake_up(pcb_t *process)
     //Lets test ready queue after wake up
     pcb_t* iter = readyQHead;
     printf("Wakeup!!\n");
-    while(iter!=NULL){
-        printf("Name: %s, PID: %d, Priority: %d\n", iter->name, iter->pid, iter->priority);
-        iter = iter->next;
-    }
-
-
+    while(iter!=NULL){printf("Name: %s, PID: %d, Priority: %d\n", iter->name, iter->pid, iter->priority);iter = iter->next;}
     pthread_mutex_unlock(&running_processes_mutex);
     pthread_mutex_unlock(&queue_mutex);
-
 }
 
 

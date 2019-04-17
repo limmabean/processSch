@@ -8,17 +8,13 @@
 
 /cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/src/os-sim.h
 
-/cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/src/student.c
-assert.h
--
-pthread.h
--
-stdio.h
--
-stdlib.h
--
-string.h
--
+/cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/src/process.c
 os-sim.h
 /cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/src/os-sim.h
+process.h
+/cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/src/process.h
+stdlib.h
+-
+
+/cygdrive/c/Users/Jongmook/Documents/Gatech/3056/ASS4/process_scheduling/processSch/src/process.h
 
